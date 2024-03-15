@@ -24,6 +24,7 @@ public class Program {
 				int id;
 
 				System.out.println("Agenda de contatos");
+				System.out.println();
 
 				System.out.println("Qual função deseja executar: ");
 				System.out.println("Criar contato: C");
