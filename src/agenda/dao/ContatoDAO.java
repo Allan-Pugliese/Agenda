@@ -3,12 +3,14 @@ package agenda.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import agenda.factory.ConnectionFactory;
 import agenda.model.Contato;
+import exception.ExceptionProgram;
 
 public class ContatoDAO {
 
@@ -19,7 +21,7 @@ public class ContatoDAO {
 	 * Delete - ok
 	 */
 
-	public void save(Contato contato) {
+	public void save(Contato contato) throws SQLException {
 
 		String sql = "INSERT INTO contatos(name, age,telephoneNumber, registerDate) VALUES(?, ?, ?, ?)";
 
@@ -58,14 +60,14 @@ public class ContatoDAO {
 				if (con != null) {
 					con.close();
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
+			} catch (ExceptionProgram e) {
+				e.getMessage();
 			}
 		}
 
 	}
 
-	public void update(Contato contato) {
+	public void update(Contato contato) throws SQLException {
 
 		String sql = "UPDATE contatos SET name = ?, age = ?, telephoneNumber = ?, registerDate = ? " + "WHERE id = ?";
 
@@ -102,13 +104,13 @@ public class ContatoDAO {
 				if (con != null) {
 					con.close();
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
+			} catch (ExceptionProgram e) {
+				e.getMessage();
 			}
 		}
 	}
 
-	public void deleteById(int id) {
+	public void deleteById(int id) throws Exception {
 
 		String sql = "DELETE FROM contatos WHERE id= ?";
 
@@ -129,8 +131,8 @@ public class ContatoDAO {
 			pstm.execute();
 			System.out.println("Contato deletado");
 
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (ExceptionProgram e) {
+			e.getMessage();
 		} finally {
 			try {
 				if (pstm != null) {
@@ -145,7 +147,7 @@ public class ContatoDAO {
 		}
 	}
 
-	public List<Contato> listContatos() {
+	public List<Contato> listContatos() throws SQLException {
 
 		String sql = "SELECT * FROM contatos";
 
@@ -201,15 +203,15 @@ public class ContatoDAO {
 				if (con != null) {
 					con.close();
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
+			} catch (ExceptionProgram e) {
+				e.getMessage();
 			}
 		}
 		return contatos;
 
 	}
 
-	public Contato findById(int id) {
+	public Contato findById(int id) throws Exception {
 
 		Connection con = null;
 		PreparedStatement pstm = null;
@@ -231,8 +233,8 @@ public class ContatoDAO {
 				contato.setTelephoneNumber(rset.getString("telephoneNumber"));
 				contato.setRegisterDate(rset.getDate("registerDate"));
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (ExceptionProgram e) {
+			e.getMessage();
 		} finally {
 			try {
 				if (rset != null) {
@@ -245,7 +247,7 @@ public class ContatoDAO {
 					con.close();
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
+				e.getMessage();
 			}
 		}
 

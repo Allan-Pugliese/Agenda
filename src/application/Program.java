@@ -9,7 +9,7 @@ import agenda.model.Contato;
 
 public class Program {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 
 		Locale.setDefault(Locale.US);
 		char optionExit;
